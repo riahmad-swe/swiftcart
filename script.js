@@ -1,6 +1,8 @@
 const BASE_URL = "https://fakestoreapi.com";
 
 const topRatedContainer = document.getElementById("top-rated");
+const productsContainer = document.getElementById("products");
+const categoriesContainer = document.getElementById("categories");
 
 function productCard(product) {
 	return `
@@ -14,7 +16,7 @@ function productCard(product) {
                     <span class="text-blue-600 text-lg font-bold">💵 $${product.price}</span>
                     <span class="font-semibold">⭐️ ${product.rating.rate}</span>
                 </div>
-                <span class="px-3 py-1 w-fit rounded-full bg-blue-600 text-zinc-50 font-medium text-sm capitalize">🏷️ ${product.category}</span>
+                <span class="px-3 py-1 w-fit rounded-full bg-blue-600 text-zinc-50 font-medium text-sm capitalize">🏷 ${product.category}</span>
                 <div class="mt-2 space-y-2">
                     <button class="w-full bg-zinc-300/75 hover:bg-zinc-200 py-2 rounded-lg font-semibold cursor-pointer">Details</button>
                     <button class="w-full bg-blue-600 text-zinc-50 py-2 rounded-lg font-semibold hover:bg-blue-700 cursor-pointer">
@@ -36,8 +38,55 @@ async function loadTopRated() {
 		topRatedContainer.innerHTML = top.map(productCard).join("");
 	} catch (error) {
 		topRatedContainer.innerHTML =
-			"<p class='text-center text-red-500 col-span-full'>Failed to load top products.</p>";
+			"<p class='text-center text-red-600 text-xl font-medium col-span-full'>Failed to load top products.</p>";
+	}
+}
+
+async function loadCategories() {
+	try {
+		const res = await fetch(BASE_URL + "/products/categories");
+		const categories = await res.json();
+
+		categoriesContainer.innerHTML =
+			`<button 
+                class="px-4 py-2 bg-black text-white rounded"
+                onclick="loadProducts('/products')"
+            >
+                All
+            </button>` +
+			categories
+				.map(
+					(category) => `
+                    <button 
+                        class="px-4 py-2 bg-gray-200 rounded hover:bg-blue-600 hover:text-white"
+                        onclick="loadProducts('/products/category/${category}')"
+                    >
+                        ${category}
+                    </button>
+                    `,
+				)
+				.join("");
+	} catch (error) {
+		categoriesContainer.innerHTML =
+			"<p class='text-red-600 text-lg font-medium'>Failed to load categories.</p>";
+	}
+}
+
+async function loadProducts(endpoint = "/products") {
+	try {
+		productsContainer.innerHTML =
+			"<p class='text-center text-xl text-zinc-300 font-medium col-span-full'>Loading...</p>";
+
+		const res = await fetch(BASE_URL + endpoint);
+		const data = await res.json();
+
+		productsContainer.innerHTML = data.map(productCard).join("");
+	} catch (error) {
+		productsContainer.innerHTML =
+			"<p class='text-center text-red-600 text-xl font-medium col-span-full'>Failed to load products.</p>";
 	}
 }
 
 loadTopRated();
+loadCategories();
+loadProducts();
