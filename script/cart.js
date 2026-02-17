@@ -12,6 +12,14 @@ const setCartCount = () => {
 	}
 };
 
+const removeCartItem = (index) => {
+	cart.splice(index, 1);
+	localStorage.setItem("cart", JSON.stringify(cart));
+
+	setCartCount();
+	showCart();
+};
+
 const openDetailsModal = (id) => {
 	fetch(`https://fakestoreapi.com/products/${id}`)
 		.then((res) => res.json())
@@ -20,10 +28,16 @@ const openDetailsModal = (id) => {
 			document.getElementById("modal-image").src = product.image;
 			document.getElementById("modal-category").innerText =
 				"Category: " + product.category;
-			document.getElementById("modal-price").innerText = "Price: $" + product.price;
+			document.getElementById("modal-price").innerText =
+				"Price: $" + product.price;
 			document.getElementById("modal-rating").innerText =
-				"Rating: ⭐ " + product.rating.rate + " (" + product.rating.count + ")";
-			document.getElementById("modal-description").innerText = product.description;
+				"Rating: ⭐ " +
+				product.rating.rate +
+				" (" +
+				product.rating.count +
+				")";
+			document.getElementById("modal-description").innerText =
+				product.description;
 
 			document.getElementById("product-modal").showModal();
 		});
@@ -40,9 +54,9 @@ const showCart = () => {
 
 	let totalPrice = 0;
 	cartItemsContainer.innerHTML = cart
-		.map((item) => {
+		.map((item, idx) => {
 			totalPrice += item.price;
-			return cartItemCard(item);
+			return cartItemCard(item, idx);
 		})
 		.join("");
 
@@ -50,7 +64,7 @@ const showCart = () => {
 	summaryTotal.innerText = `$${totalPrice.toFixed(2)}`;
 };
 
-const cartItemCard = (item) => {
+const cartItemCard = (item, idx) => {
 	return `
 			<div class="bg-white pl-6 pr-8 py-6 rounded-[20px] shadow-md shadow-black/5 flex flex-col md:flex-row gap-4 items-center">
                     <img src="${item.image}" class="size-24 object-contain hover:scale-115 transition-transform duration-300" />
@@ -68,7 +82,7 @@ const cartItemCard = (item) => {
                     </button>
                     <button 
                         class="bg-red-500 text-zinc-50 font-semibold ml-1 px-4 py-2.5 rounded-lg hover:bg-red-600 transition-colors cursor-pointer"
-                        onclick="removeCartItem(${item.id})"
+                        onclick="removeCartItem(${idx})"
                     >
                         Remove
                     </button>
