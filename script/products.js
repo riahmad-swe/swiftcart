@@ -2,6 +2,7 @@ const BASE_URL = "https://fakestoreapi.com";
 
 const productsContainer = document.getElementById("products");
 const categoriesContainer = document.getElementById("categories");
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const productCard = (product) => {
 	return `
@@ -25,6 +26,7 @@ const productCard = (product) => {
                     </button>
                     <button
                         class="w-full bg-blue-600 text-zinc-50 py-2 rounded-lg font-semibold hover:bg-blue-700 cursor-pointer"
+                        onclick="addToCart(${product.id})"
                     >
                         Add to Cart
                     </button>
@@ -32,6 +34,23 @@ const productCard = (product) => {
             </div>
         </div>
     `;
+};
+
+const setCartCount = () => {
+	const cartCountChip = document.getElementById("cart-count");
+	if (cartCountChip) {
+		cartCountChip.innerText = cart.length;
+	}
+};
+
+const addToCart = (productId) => {
+	fetch(`${BASE_URL}/products/${productId}`)
+		.then((res) => res.json())
+		.then((product) => {
+			cart.push(product);
+			localStorage.setItem("cart", JSON.stringify(cart));
+			setCartCount();
+		});
 };
 
 const openDetailsModal = (id) => {
@@ -122,3 +141,4 @@ const activateCategory = (btn, endpoint) => {
 
 loadCategories();
 loadProducts();
+setCartCount();
