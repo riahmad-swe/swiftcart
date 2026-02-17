@@ -18,6 +18,7 @@ const productCard = (product) => {
                 <div class="mt-2 space-y-2">
                     <button
                         class="w-full bg-zinc-300/75 hover:bg-zinc-200 py-2 rounded-lg font-semibold cursor-pointer"
+                        onclick="openDetailsModal(${product.id})"
                     >
                         Details
                     </button>
@@ -30,6 +31,29 @@ const productCard = (product) => {
             </div>
         </div>
     `;
+};
+
+const openDetailsModal = (id) => {
+	fetch(`https://fakestoreapi.com/products/${id}`)
+		.then((res) => res.json())
+		.then((product) => {
+			document.getElementById("modal-title").innerText = product.title;
+			document.getElementById("modal-image").src = product.image;
+			document.getElementById("modal-category").innerText =
+				"Category: " + product.category;
+			document.getElementById("modal-price").innerText =
+				"Price: $" + product.price;
+			document.getElementById("modal-rating").innerText =
+				"Rating: ⭐ " +
+				product.rating.rate +
+				" (" +
+				product.rating.count +
+				")";
+			document.getElementById("modal-description").innerText =
+				product.description;
+
+			document.getElementById("product-modal").showModal();
+		});
 };
 
 const loadTopRated = async () => {
