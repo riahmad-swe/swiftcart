@@ -11,7 +11,7 @@
 			href="./images/favicon.png"
 			type="image/x-icon"
 		/>
-		<title>Home | SwiftCart</title>
+		<title>Products | SwiftCart</title>
 		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 		<link
 			href="https://cdn.jsdelivr.net/npm/daisyui@5"
@@ -72,81 +72,25 @@
 				</a>
 			</div>
 		</nav>
-		<!-- Hero -->
-		<section
-			id="#hero"
-			class="bg-cover bg-top h-[70vh] flex items-end lg:items-center max-md:pb-12 max-lg:pb-16 pl-6 lg:pl-24 text-zinc-50 font-[cursive]"
-			style="background-image: url(&quot;./images/hero-bg.jpg&quot;)"
-		>
-			<div>
-				<h2 class="text-4xl md:text-6xl font-bold mb-8">The Best Collection For You</h2>
-				<p class="text-xl md:text-2xl mb-12">
-					Discover premium quality products at unbeatable prices.
+		<!-- Products -->
+		<section class="py-16 px-6 md:px-12 lg:px-32 2xl:px-48">
+			<!-- Header & Subtext -->
+			<div class="text-center">
+				<h2 class="text-4xl md:text-5xl font-bold text-blue-900">All Products</h2>
+				<p class="mt-2.5 text-xl font-medium text-zinc-700">
+					Browse products by category or explore our full catalog.
 				</p>
-				<a
-					href="/products.html"
-					class="bg-blue-600 px-8 py-4 text-xl font-semibold tracking-wider rounded-xl hover:bg-blue-700 transition font-[Helvetica]"
-				>
-					Shop Now
-				</a>
 			</div>
-		</section>
-		<!-- Features -->
-		<section
-			id="features"
-			class="pt-24 px-6 lg:px-48 text-center"
-		>
-			<h2 class="text-4xl font-bold mb-10 text-blue-900">Why Choose Us</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 h-40">
-				<div
-					class="bg-white p-6 rounded-xl shadow-md shadow-black/10 flex flex-col justify-center items-center"
-				>
-					<h3 class="text-xl font-semibold mb-4">🚚 Fast Delivery</h3>
-					<p>Lightning fast shipping in BD.</p>
-				</div>
-				<div
-					class="bg-white p-6 rounded-xl shadow-md shadow-black/10 flex flex-col justify-center items-center"
-				>
-					<h3 class="text-xl font-semibold mb-4">🔒 Secure Payment</h3>
-					<p>100% secure checkout guarantee.</p>
-				</div>
-				<div
-					class="bg-white p-6 rounded-xl shadow-md shadow-black/10 flex flex-col justify-center items-center"
-				>
-					<h3 class="text-xl font-semibold mb-4">📞 24/7 Support</h3>
-					<p>We're here anytime you need help.</p>
-				</div>
-				<div
-					class="bg-white p-6 rounded-xl shadow-md shadow-black/10 flex flex-col justify-center items-center"
-				>
-					<h3 class="text-xl font-semibold mb-4">🔙 Easy Return</h3>
-					<p>Simple & effortless return process.</p>
-				</div>
-			</div>
-		</section>
-		<!-- Top Rated Products -->
-		<section class="pt-24 px-6 lg:px-48">
-			<h2 class="text-3xl font-bold text-center mb-10">Top Rated Products</h2>
+			<!-- Categories -->
 			<div
-				id="top-rated"
-				class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+				id="categories"
+				class="flex flex-wrap justify-center gap-4 mt-8 mb-12"
 			></div>
-		</section>
-		<!-- Newsletter -->
-		<section
-			class="mt-24 w-fit mx-auto bg-blue-600 text-zinc-50 px-24 py-16 text-center rounded-3xl"
-		>
-			<h2 class="text-3xl font-bold mb-6">Subscribe to our Newsletter</h2>
-			<input
-				type="email"
-				placeholder="Enter your email address..."
-				class="px-4 py-2 rounded-[10px] text-zinc-950 bg-zinc-100 w-64 border-2 border-zinc-400 placeholder-zinc-500 focus:outline-none focus:border-blue-800"
-			/>
-			<button
-				class="bg-zinc-950 px-6 py-2.5 rounded-[10px] ml-2 font-semibold hover:bg-zinc-800 transition duration-200 cursor-pointer"
-			>
-				Subscribe
-			</button>
+			<!-- Products Data -->
+			<div
+				id="products"
+				class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 min-h-[25vh]"
+			></div>
 		</section>
 		<!-- Footer -->
 		<footer class="mt-24 bg-gray-900 text-zinc-300 pt-12 px-6 lg:px-48 pb-6">
@@ -274,6 +218,6 @@
 			</form>
 		</dialog>
 		<!-- JS Scripts -->
-		<script src="./script/index.js"></script>
+		<script src="./script/products.js"></script>
 	</body>
 </html>
